@@ -8,7 +8,7 @@ import 'core/constants/params.dart';
 import 'core/database/datebase_queries.dart';
 import 'core/routes/app_router.dart';
 import 'core/routes/app_routes_names.dart';
-import 'features/Products/view_model/products_view_model.dart';
+import 'features/Products/view_model/get_products_view_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => serviceLocator<ProductsProvider>()
+      create: (context) => serviceLocator<GetProductsProvider>()
         ..initDataBase(
           const InitDatabaseParams(
             databasesName: AppStrings.products,

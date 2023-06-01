@@ -5,4 +5,7 @@ class AppStrings {
   static const String productPrice = 'productPrice';
   static const String id = 'id';
   static const String products = 'products';
+
+  static const String addProduct = 'Add Product';
+  static const String egp = 'EGP';
 }

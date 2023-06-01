@@ -5,7 +5,7 @@ import 'package:products_task/features/Products/repository/base/base_products_re
 
 import '../../../core/utls/utls.dart';
 
-class ProductsProvider extends ChangeNotifier {
+class GetProductsProvider extends ChangeNotifier {
   final BaseProductsRepository _baseProductsRepository;
   String _errorMessage = '';
   late List<ProductsModel> _productsList;
@@ -16,11 +16,12 @@ class ProductsProvider extends ChangeNotifier {
 
   //getters
   List<ProductsModel> get productsList => _productsList;
-  get errorMessage => _errorMessage;
-  get initDatabaseRequestStatus => _initDataBaseRequestStatus;
-  get getAllDataFromDatabaseRequestStatus =>
+  String get errorMessage => _errorMessage;
+  RequestStatusWithoutIdle get initDatabaseRequestStatus =>
+      _initDataBaseRequestStatus;
+  RequestStatusWithoutIdle get getAllDataFromDatabaseRequestStatus =>
       _getAlldataFromDatabaseRequestStatus;
-  ProductsProvider(this._baseProductsRepository);
+  GetProductsProvider(this._baseProductsRepository);
 
   Future<void> initDataBase(InitDatabaseParams params) async {
     final result = await _baseProductsRepository.initDataBase(params);

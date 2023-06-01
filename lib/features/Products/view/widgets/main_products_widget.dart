@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:products_task/core/constants/app_strings.dart';
-import 'package:products_task/features/Products/view_model/products_view_model.dart';
+import 'package:products_task/core/constants/extensions.dart';
+import 'package:products_task/features/Products/view_model/get_products_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/constants/params.dart';
@@ -27,7 +29,7 @@ class _ProductsWidgetState extends State<ProductsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProductsProvider>(
+    return Consumer<GetProductsProvider>(
       builder: (context, value, child) {
         switch (value.getAllDataFromDatabaseRequestStatus) {
           case RequestStatusWithoutIdle.loading:
@@ -43,7 +45,19 @@ class _ProductsWidgetState extends State<ProductsWidget> {
                     itemCount: value.productsList.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        title: Text(value.productsList[index].productName),
+                        leading: Image.file(
+                          value.productsList[index].productImage,
+                          width: 80.w,
+                          height: 80.h,
+                        ),
+                        title: Text(
+                          value.productsList[index].productName,
+                          style: context.theme.textTheme.titleLarge,
+                        ),
+                        subtitle: Text(
+                          '${value.productsList[index].productPrice} ${AppStrings.egp}',
+                          style: context.theme.textTheme.titleSmall,
+                        ),
                       );
                     },
                   );
@@ -54,15 +68,13 @@ class _ProductsWidgetState extends State<ProductsWidget> {
               isHoleScreen: false,
               onRetryPressed: () {},
             );
-          default:
-            return const SizedBox();
         }
       },
     );
   }
 
   void getAllProducts() {
-    Provider.of<ProductsProvider>(context, listen: false).getAllProducts(
+    Provider.of<GetProductsProvider>(context, listen: false).getAllProducts(
         const GetAllProductsParams(tableName: AppStrings.products));
   }
 }

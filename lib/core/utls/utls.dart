@@ -3,3 +3,10 @@ enum RequestStatusWithoutIdle {
   success,
   error,
 }
+
+enum RequestStatusWithIdle {
+  idle,
+  loading,
+  success,
+  error,
+}

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:products_task/core/constants/app_strings.dart';
 import 'package:products_task/core/constants/extensions.dart';
+import 'package:products_task/core/routes/app_routes_names.dart';
 import 'package:products_task/core/widgets/error_screen.dart';
-import 'package:products_task/features/Products/view_model/products_view_model.dart';
+import 'package:products_task/features/Products/view_model/get_products_view_model.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../core/constants/params.dart';
 import '../../../../core/utls/utls.dart';
 import '../widgets/main_products_widget.dart';
 
@@ -16,12 +16,24 @@ class ProductsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(
           AppStrings.products,
-          style: context.theme.textTheme.titleMedium,
+          style: context.theme.textTheme.titleLarge,
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.navigateToNamed(AppRoutesNames.addProduct);
+            },
+            icon: Icon(
+              Icons.add,
+              color: context.theme.primaryColor,
+            ),
+          ),
+        ],
       ),
-      body: Consumer<ProductsProvider>(
+      body: Consumer<GetProductsProvider>(
         builder: (context, productsProvider, child) {
           switch (productsProvider.initDatabaseRequestStatus) {
             case RequestStatusWithoutIdle.loading:
@@ -36,8 +48,6 @@ class ProductsScreen extends StatelessWidget {
                 isHoleScreen: false,
                 onRetryPressed: () {},
               );
-            default:
-              return const SizedBox();
           }
         },
       ),
