@@ -14,7 +14,7 @@ GetIt serviceLocator = GetIt.instance;
 class ServiceLocator {
   static void setup() {
     //providers
-    serviceLocator.registerLazySingleton<ChangeNotifier>(
+    serviceLocator.registerLazySingleton<ProductsProvider>(
         () => ProductsProvider(serviceLocator()));
     //repository
     serviceLocator.registerLazySingleton<BaseProductsRepository>(

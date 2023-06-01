@@ -8,7 +8,7 @@ abstract class BaseDataBaseService {
   Future<int> deleteDataFromDatabaseById(
       {required int id, required String tableName});
   Future<int> deleteAllDataFromDatabase({required String tableName});
-  Future<void> insertIntoDataBase(
-      {required List<Object?> data, required String query});
+  Future<int> insertIntoDataBase(
+      {required Map<String, dynamic> data, required String tableName});
   Future<int> updateDataBase(String query, List arguments);
 }
