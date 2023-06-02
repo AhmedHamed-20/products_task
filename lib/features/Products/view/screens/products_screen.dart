@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:products_task/core/constants/app_padding.dart';
 import 'package:products_task/core/constants/app_strings.dart';
 import 'package:products_task/core/constants/extensions.dart';
 import 'package:products_task/core/routes/app_routes_names.dart';
@@ -33,23 +34,26 @@ class ProductsScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Consumer<GetProductsProvider>(
-        builder: (context, productsProvider, child) {
-          switch (productsProvider.initDatabaseRequestStatus) {
-            case RequestStatusWithoutIdle.loading:
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            case RequestStatusWithoutIdle.success:
-              return const ProductsWidget();
-            case RequestStatusWithoutIdle.error:
-              return ErrorScreen(
-                message: productsProvider.errorMessage,
-                isHoleScreen: false,
-                onRetryPressed: () {},
-              );
-          }
-        },
+      body: Padding(
+        padding: const EdgeInsets.all(AppPadding.p10),
+        child: Consumer<GetProductsProvider>(
+          builder: (context, productsProvider, child) {
+            switch (productsProvider.initDatabaseRequestStatus) {
+              case RequestStatusWithoutIdle.loading:
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              case RequestStatusWithoutIdle.success:
+                return const ProductsWidget();
+              case RequestStatusWithoutIdle.error:
+                return ErrorScreen(
+                  message: productsProvider.errorMessage,
+                  isHoleScreen: false,
+                  onRetryPressed: () {},
+                );
+            }
+          },
+        ),
       ),
     );
   }

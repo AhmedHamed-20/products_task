@@ -33,4 +33,8 @@ extension NaviagtionExtension on BuildContext {
   void naviagtorPop() {
     Navigator.of(this).pop();
   }
+
+  void naviagtorPopUntil(String routeName) {
+    Navigator.of(this).popUntil(ModalRoute.withName(routeName));
+  }
 }

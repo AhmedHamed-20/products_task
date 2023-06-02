@@ -1,15 +1,18 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:products_task/core/constants/app_radius.dart';
 import 'package:products_task/core/utls/utls.dart';
-import 'package:products_task/features/Products/view_model/add_product_view_model.dart';
+import 'package:products_task/features/Products/view_model/update_delete_product_view_model.dart';
 import 'package:provider/provider.dart';
 
-class ProductImageWidget extends StatelessWidget {
-  const ProductImageWidget({super.key});
+import '../../../../core/constants/app_radius.dart';
 
+class UpdateProductImageWidget extends StatelessWidget {
+  const UpdateProductImageWidget({super.key, required this.productImage});
+  final File productImage;
   @override
   Widget build(BuildContext context) {
-    return Consumer<AddProductProvider>(
+    return Consumer<UpdateDeleteProductProvider>(
       builder: (context, value, child) {
         switch (value.pickImageRequestStatus) {
           case RequestStatusWithIdle.idle:
@@ -17,10 +20,10 @@ class ProductImageWidget extends StatelessWidget {
               onTap: () {
                 value.pickImage();
               },
-              child: const CircleAvatar(
+              child: CircleAvatar(
                 radius: AppRadius.r70,
-                child: Center(
-                  child: Icon(Icons.add),
+                backgroundImage: FileImage(
+                  productImage,
                 ),
               ),
             );
@@ -35,7 +38,9 @@ class ProductImageWidget extends StatelessWidget {
               },
               child: CircleAvatar(
                 radius: AppRadius.r70,
-                backgroundImage: FileImage(value.pickedImage!),
+                backgroundImage: FileImage(
+                  value.pickedImage!,
+                ),
               ),
             );
           case RequestStatusWithIdle.error:
@@ -43,10 +48,10 @@ class ProductImageWidget extends StatelessWidget {
               onTap: () {
                 value.pickImage();
               },
-              child: const CircleAvatar(
+              child: CircleAvatar(
                 radius: AppRadius.r70,
-                child: Center(
-                  child: Icon(Icons.add),
+                backgroundImage: FileImage(
+                  productImage,
                 ),
               ),
             );

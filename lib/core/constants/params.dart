@@ -30,3 +30,26 @@ class GetAllProductsParams extends Equatable {
   @override
   List<Object?> get props => [tableName];
 }
+
+class UpdateProductParams extends Equatable {
+  final String query;
+  final List<dynamic> args;
+
+  const UpdateProductParams(this.query, this.args);
+
+  @override
+  List<Object?> get props => [query, args];
+}
+
+class UpdateProductTextFieldsParams extends Equatable {
+  final String productName;
+  final int productPrice;
+
+  const UpdateProductTextFieldsParams({
+    required this.productName,
+    required this.productPrice,
+  });
+
+  @override
+  List<Object?> get props => [productName, productPrice];
+}

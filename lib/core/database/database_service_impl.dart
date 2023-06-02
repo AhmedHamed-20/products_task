@@ -1,9 +1,8 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:products_task/core/constants/app_strings.dart';
+import 'package:products_task/core/constants/constant.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'base_database_service.dart';
@@ -33,8 +32,9 @@ class DatabaseProvider implements BaseDataBaseService {
     final List<Map<String, Object?>> data =
         await database.rawQuery(DatebaseQueries.selectAllFromTable + tableName);
     for (var row in data) {
-      final imageFile = await _generateFileForimage(row);
+      final imageFile = await Constants.generateFileForimage(row);
       convertedData.add({
+        AppStrings.id: row[AppStrings.id],
         AppStrings.productName: row[AppStrings.productName],
         AppStrings.productPrice: row[AppStrings.productPrice],
         AppStrings.productImage: imageFile,
@@ -43,30 +43,21 @@ class DatabaseProvider implements BaseDataBaseService {
     return convertedData;
   }
 
-  Future<File> _generateFileForimage(Map<String, Object?> row) async {
-    var imgBytes = row[AppStrings.productImage] as List<int>;
-    var fileName = 'image_${row['id']}.png'; // Generate unique file name
-    var imageFile = await _getLocalFilePath(fileName); // Get the local file
-    await imageFile.writeAsBytes(imgBytes);
-    return imageFile;
-  }
-
-  Future<File> _getLocalFilePath(String fileName) async {
-    Directory directory = await getApplicationDocumentsDirectory();
-    String path = join(directory.path, fileName);
-    return File(path);
-  }
-
   @override
   Future<int> deleteDataFromDatabaseById(
       {required int id, required String tableName}) async {
-    return await database
-        .rawDelete('DELETE FROM $tableName WHERE  dataBaseId=$id');
+    return await database.rawDelete(
+      DatebaseQueries.deleteFromTable +
+          tableName +
+          DatebaseQueries.whereId +
+          id.toString(),
+    );
   }
 
   @override
   Future<int> deleteAllDataFromDatabase({required String tableName}) async {
-    return await database.rawDelete('DELETE FROM $tableName');
+    return await database
+        .rawDelete(DatebaseQueries.deleteFromTable + tableName);
   }
 
   @override

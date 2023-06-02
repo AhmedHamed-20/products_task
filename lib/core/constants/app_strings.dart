@@ -8,4 +8,5 @@ class AppStrings {
 
   static const String addProduct = 'Add Product';
   static const String egp = 'EGP';
+  static const String updateProduct = 'Update Product';
 }

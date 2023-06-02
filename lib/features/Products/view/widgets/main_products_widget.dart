@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:products_task/core/constants/app_strings.dart';
 import 'package:products_task/core/constants/extensions.dart';
+import 'package:products_task/core/routes/app_routes_names.dart';
 import 'package:products_task/features/Products/view_model/get_products_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -44,19 +45,29 @@ class _ProductsWidgetState extends State<ProductsWidget> {
                 : ListView.builder(
                     itemCount: value.productsList.length,
                     itemBuilder: (context, index) {
-                      return ListTile(
-                        leading: Image.file(
-                          value.productsList[index].productImage,
-                          width: 80.w,
-                          height: 80.h,
-                        ),
-                        title: Text(
-                          value.productsList[index].productName,
-                          style: context.theme.textTheme.titleLarge,
-                        ),
-                        subtitle: Text(
-                          '${value.productsList[index].productPrice} ${AppStrings.egp}',
-                          style: context.theme.textTheme.titleSmall,
+                      return InkWell(
+                        onTap: () {
+                          context.navigateToNamed(
+                            AppRoutesNames.updateDeleteProduct,
+                            arguments: value.productsList[index],
+                          );
+                        },
+                        child: ListTile(
+                          leading: Image.memory(
+                            value.productsList[index].productImage
+                                .readAsBytesSync(),
+                            key: ValueKey(value.productsList[index].id),
+                            width: 80.w,
+                            height: 80.h,
+                          ),
+                          title: Text(
+                            value.productsList[index].productName,
+                            style: context.theme.textTheme.titleLarge,
+                          ),
+                          subtitle: Text(
+                            '${value.productsList[index].productPrice} ${AppStrings.egp}',
+                            style: context.theme.textTheme.titleSmall,
+                          ),
                         ),
                       );
                     },

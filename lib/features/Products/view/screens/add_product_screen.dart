@@ -6,7 +6,7 @@ import 'package:products_task/core/constants/extensions.dart';
 
 import '../widgets/add_product_button_widget.dart';
 import '../widgets/add_products_text_fields.dart';
-import '../widgets/product_image_widget.dart';
+import '../widgets/add_product_image_widget.dart';
 
 class AddProductScreen extends StatelessWidget {
   const AddProductScreen({super.key});
@@ -25,7 +25,7 @@ class AddProductScreen extends StatelessWidget {
           padding: const EdgeInsets.all(AppPadding.p10),
           child: Column(
             children: [
-              const ProductImageWidget(),
+              const AddProductImageWidget(),
               SizedBox(
                 height: 10.h,
               ),

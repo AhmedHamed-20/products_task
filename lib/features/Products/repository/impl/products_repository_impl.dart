@@ -45,4 +45,15 @@ class ProductsRepositoryImpl implements BaseProductsRepository {
           message: exception.dataBaseErrorMessageModel.errorMessage));
     }
   }
+
+  @override
+  Future<Either<Failure, int>> updateProduct(UpdateProductParams params) async {
+    try {
+      final result = await _localProductsDataSource.updateProduct(params);
+      return Right(result);
+    } on AppDatabaseException catch (exception) {
+      return Left(DatabaseFailure(
+          message: exception.dataBaseErrorMessageModel.errorMessage));
+    }
+  }
 }

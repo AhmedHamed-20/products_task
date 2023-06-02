@@ -8,4 +8,6 @@ abstract class BaseProductsRepository {
   Future<Either<Failure, int>> insertProduct(InsertProductParams params);
   Future<Either<Failure, List<ProductsModel>>> getAllProducts(
       GetAllProductsParams params);
+
+  Future<Either<Failure, int>> updateProduct(UpdateProductParams params);
 }

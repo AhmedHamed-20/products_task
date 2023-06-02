@@ -45,4 +45,15 @@ class LocalProductsDataSourceImpl implements BaseLocalProductsDataSource {
       throw AppDatabaseException(LocalErrorsMessageModel.fromException(e));
     }
   }
+
+  @override
+  Future<int> updateProduct(UpdateProductParams params) async {
+    try {
+      final result =
+          await _baseDataBaseService.updateDataBase(params.query, params.args);
+      return result;
+    } on Exception catch (e) {
+      throw AppDatabaseException(LocalErrorsMessageModel.fromException(e));
+    }
+  }
 }

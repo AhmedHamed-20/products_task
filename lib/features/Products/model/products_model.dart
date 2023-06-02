@@ -6,17 +6,19 @@ class ProductsModel extends Equatable {
   final String productName;
   final int productPrice;
   final File productImage;
-
+  final int? id;
   const ProductsModel(
       {required this.productName,
       required this.productPrice,
-      required this.productImage});
+      required this.productImage,
+      this.id});
 
   factory ProductsModel.fromMap(Map<String, dynamic> map) {
     return ProductsModel(
       productName: map['productName'],
       productPrice: map['productPrice'],
       productImage: map['productImage'],
+      id: map['id'],
     );
   }
 
@@ -34,5 +36,6 @@ class ProductsModel extends Equatable {
         productName,
         productPrice,
         productImage,
+        id,
       ];
 }

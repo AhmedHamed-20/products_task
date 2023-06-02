@@ -5,4 +5,5 @@ abstract class BaseLocalProductsDataSource {
   Future<void> initDataBase(InitDatabaseParams params);
   Future<int> insertProduct(InsertProductParams params);
   Future<List<ProductsModel>> getAllProducts(GetAllProductsParams params);
+  Future<int> updateProduct(UpdateProductParams params);
 }
