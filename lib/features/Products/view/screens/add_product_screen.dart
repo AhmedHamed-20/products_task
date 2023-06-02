@@ -8,12 +8,15 @@ import '../widgets/add_product_button_widget.dart';
 import '../widgets/add_products_text_fields.dart';
 import '../widgets/add_product_image_widget.dart';
 
+final GlobalKey addProductKey = GlobalKey();
+
 class AddProductScreen extends StatelessWidget {
   const AddProductScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: addProductKey,
       appBar: AppBar(
         title: Text(
           AppStrings.addProduct,

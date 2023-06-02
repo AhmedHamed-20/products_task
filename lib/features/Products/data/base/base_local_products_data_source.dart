@@ -6,4 +6,5 @@ abstract class BaseLocalProductsDataSource {
   Future<int> insertProduct(InsertProductParams params);
   Future<List<ProductsModel>> getAllProducts(GetAllProductsParams params);
   Future<int> updateProduct(UpdateProductParams params);
+  Future<int> deleteProduct(DeleteProductParams params);
 }

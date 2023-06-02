@@ -56,4 +56,15 @@ class ProductsRepositoryImpl implements BaseProductsRepository {
           message: exception.dataBaseErrorMessageModel.errorMessage));
     }
   }
+
+  @override
+  Future<Either<Failure, int>> deleteProduct(DeleteProductParams params) async {
+    try {
+      final result = await _localProductsDataSource.deleteProduct(params);
+      return Right(result);
+    } on AppDatabaseException catch (exception) {
+      return Left(DatabaseFailure(
+          message: exception.dataBaseErrorMessageModel.errorMessage));
+    }
+  }
 }

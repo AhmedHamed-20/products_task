@@ -18,7 +18,7 @@ class ServiceLocator {
     serviceLocator.registerLazySingleton<GetProductsProvider>(
         () => GetProductsProvider(serviceLocator()));
     serviceLocator.registerFactory<AddProductProvider>(
-        () => AddProductProvider(serviceLocator()));
+        () => AddProductProvider(serviceLocator(), serviceLocator()));
     serviceLocator.registerFactory<UpdateDeleteProductProvider>(
         () => UpdateDeleteProductProvider(serviceLocator(), serviceLocator()));
     //repository

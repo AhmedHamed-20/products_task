@@ -22,12 +22,15 @@ class UpdateDeleteProductProvider extends ChangeNotifier {
       this._baseProductsRepository, this._getProductsProvider);
   //variables
   RequestStatusWithIdle _updateProductStatus = RequestStatusWithIdle.idle;
+  RequestStatusWithIdle _deleteProductStatus = RequestStatusWithIdle.idle;
+
   File? _pickedImage;
   RequestStatusWithIdle _pickImageRequestStatus = RequestStatusWithIdle.idle;
   //getters
   RequestStatusWithIdle get updateProductStatus => _updateProductStatus;
   File? get pickedImage => _pickedImage;
   RequestStatusWithIdle get pickImageRequestStatus => _pickImageRequestStatus;
+  RequestStatusWithIdle get deleteProductStatus => _deleteProductStatus;
   //functions
 
   Future<void> updateProduct({
@@ -52,13 +55,12 @@ class UpdateDeleteProductProvider extends ChangeNotifier {
       notifyListeners();
     }, (r) {
       _updateProductStatus = RequestStatusWithIdle.success;
+      notifyListeners();
       Constants.showToast(
           message: 'product updated successfully',
           backgroundColor: AppColors.toastSuccessColor,
           textColor: Colors.white);
-      notifyListeners();
       getAllProducts();
-      //   Constants.refreshImageWidget(imageKey);
       updateProductScreenKey.currentState?.context.naviagtorPop();
     });
   }
@@ -91,5 +93,24 @@ class UpdateDeleteProductProvider extends ChangeNotifier {
       _pickImageRequestStatus = RequestStatusWithIdle.error;
       notifyListeners();
     }
+  }
+
+  Future<void> deleteProduct(DeleteProductParams params) async {
+    _deleteProductStatus = RequestStatusWithIdle.loading;
+    notifyListeners();
+    final result = await _baseProductsRepository.deleteProduct(params);
+    result.fold((l) {
+      _deleteProductStatus = RequestStatusWithIdle.error;
+      notifyListeners();
+    }, (r) {
+      _deleteProductStatus = RequestStatusWithIdle.success;
+      notifyListeners();
+      Constants.showToast(
+          message: 'product deleted successfully',
+          backgroundColor: AppColors.toastSuccessColor,
+          textColor: Colors.white);
+      getAllProducts();
+      updateProductScreenKey.currentState?.context.naviagtorPop();
+    });
   }
 }

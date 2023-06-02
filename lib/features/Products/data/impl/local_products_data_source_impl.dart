@@ -56,4 +56,15 @@ class LocalProductsDataSourceImpl implements BaseLocalProductsDataSource {
       throw AppDatabaseException(LocalErrorsMessageModel.fromException(e));
     }
   }
+
+  @override
+  Future<int> deleteProduct(DeleteProductParams params) async {
+    try {
+      final result = await _baseDataBaseService.deleteDataFromDatabaseById(
+          id: params.id, tableName: params.tableName);
+      return result;
+    } on Exception catch (e) {
+      throw AppDatabaseException(LocalErrorsMessageModel.fromException(e));
+    }
+  }
 }

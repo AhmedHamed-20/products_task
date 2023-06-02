@@ -4,16 +4,20 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:products_task/core/constants/app_colors.dart';
 import 'package:products_task/core/constants/constant.dart';
-import 'package:products_task/core/controllers/text_fileds_controllers.dart';
+import 'package:products_task/core/constants/extensions.dart';
 import 'package:products_task/core/utls/utls.dart';
 import 'package:products_task/features/Products/model/products_model.dart';
 
+import '../../../core/constants/app_strings.dart';
 import '../../../core/constants/params.dart';
 import '../repository/base/base_products_repository.dart';
+import '../view/screens/add_product_screen.dart';
+import 'get_products_view_model.dart';
 
 class AddProductProvider extends ChangeNotifier {
   final BaseProductsRepository _baseProductsRepository;
-  AddProductProvider(this._baseProductsRepository);
+  final GetProductsProvider _getProductsProvider;
+  AddProductProvider(this._baseProductsRepository, this._getProductsProvider);
   //variables
   RequestStatusWithIdle _addProductRequestStatus = RequestStatusWithIdle.idle;
   RequestStatusWithIdle _pickImageRequestStatus = RequestStatusWithIdle.idle;
@@ -38,16 +42,20 @@ class AddProductProvider extends ChangeNotifier {
       notifyListeners();
     }, (r) {
       _addProductRequestStatus = RequestStatusWithIdle.success;
-      MainTextFieldsControllers.productNameController.clear();
-      MainTextFieldsControllers.productPriceController.clear();
-      _pickedImage = null;
+
+      notifyListeners();
       Constants.showToast(
           message: 'product added successfully',
           backgroundColor: AppColors.toastSuccessColor,
           textColor: Colors.white);
-      _pickImageRequestStatus = RequestStatusWithIdle.idle;
-      notifyListeners();
+      getAllProducts();
+      addProductKey.currentState?.context.naviagtorPop();
     });
+  }
+
+  Future<void> getAllProducts() {
+    return _getProductsProvider.getAllProducts(
+        const GetAllProductsParams(tableName: AppStrings.products));
   }
 
   Future<void> pickImage() async {

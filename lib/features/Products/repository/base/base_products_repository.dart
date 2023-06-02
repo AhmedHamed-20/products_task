@@ -10,4 +10,5 @@ abstract class BaseProductsRepository {
       GetAllProductsParams params);
 
   Future<Either<Failure, int>> updateProduct(UpdateProductParams params);
+  Future<Either<Failure, int>> deleteProduct(DeleteProductParams params);
 }

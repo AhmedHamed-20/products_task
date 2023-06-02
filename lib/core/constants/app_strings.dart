@@ -9,4 +9,9 @@ class AppStrings {
   static const String addProduct = 'Add Product';
   static const String egp = 'EGP';
   static const String updateProduct = 'Update Product';
+  static const String deleteProduct = 'Delete Product';
+  static const String areYouSureYouWantToDeleteThisProduct =
+      'Are you sure you want to delete this product?';
+  static const String yes = 'Yes';
+  static const String no = 'No';
 }

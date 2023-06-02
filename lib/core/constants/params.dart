@@ -53,3 +53,13 @@ class UpdateProductTextFieldsParams extends Equatable {
   @override
   List<Object?> get props => [productName, productPrice];
 }
+
+class DeleteProductParams extends Equatable {
+  final String tableName;
+  final int id;
+
+  const DeleteProductParams({required this.tableName, required this.id});
+
+  @override
+  List<Object?> get props => [tableName, id];
+}
