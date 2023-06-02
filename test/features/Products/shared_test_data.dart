@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:products_task/core/constants/app_strings.dart';
 import 'package:products_task/core/constants/params.dart';
 import 'package:products_task/core/database/datebase_queries.dart';
+import 'package:products_task/core/error/error_message_model.dart';
+import 'package:products_task/core/error/exception.dart';
 import 'package:products_task/features/Products/model/products_model.dart';
 
 const InsertProductParams tInsertProductParams = InsertProductParams(
@@ -56,3 +58,6 @@ const DeleteProductParams tDeleteProductParams = DeleteProductParams(
   id: 1,
   tableName: AppStrings.products,
 );
+
+const AppDatabaseException tAppDatabaseException = AppDatabaseException(
+    LocalErrorsMessageModel(errorMessage: 'error message'));
