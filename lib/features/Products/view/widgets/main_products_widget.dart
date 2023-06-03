@@ -40,7 +40,7 @@ class _ProductsWidgetState extends State<ProductsWidget> {
           case RequestStatusWithoutIdle.success:
             return value.productsList.isEmpty
                 ? const Center(
-                    child: Text('No Data'),
+                    child: Text('No Data to show add some products'),
                   )
                 : ListView.builder(
                     itemCount: value.productsList.length,
@@ -63,10 +63,14 @@ class _ProductsWidgetState extends State<ProductsWidget> {
                           title: Text(
                             value.productsList[index].productName,
                             style: context.theme.textTheme.titleLarge,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                           subtitle: Text(
                             '${value.productsList[index].productPrice} ${AppStrings.egp}',
                             style: context.theme.textTheme.titleSmall,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       );

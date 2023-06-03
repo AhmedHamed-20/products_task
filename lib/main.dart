@@ -8,6 +8,7 @@ import 'core/constants/params.dart';
 import 'core/database/datebase_queries.dart';
 import 'core/routes/app_router.dart';
 import 'core/routes/app_routes_names.dart';
+import 'core/theme/app_theme.dart';
 import 'features/Products/view_model/get_products_view_model.dart';
 
 void main() async {
@@ -34,11 +35,10 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) => MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
+          title: AppStrings.products,
+          theme: AppTheme.light,
+          darkTheme: AppTheme.dark,
+          themeMode: ThemeMode.light,
           onGenerateRoute: AppRouter().onGenerateRoute,
           initialRoute: AppRoutesNames.home,
         ),

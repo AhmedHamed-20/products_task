@@ -19,7 +19,7 @@ class ProductsScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          AppStrings.products,
+          'Products',
           style: context.theme.textTheme.titleLarge,
         ),
         actions: [
