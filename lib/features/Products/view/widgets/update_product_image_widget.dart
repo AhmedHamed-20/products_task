@@ -22,8 +22,8 @@ class UpdateProductImageWidget extends StatelessWidget {
               },
               child: CircleAvatar(
                 radius: AppRadius.r70,
-                backgroundImage: FileImage(
-                  productImage,
+                backgroundImage: MemoryImage(
+                  productImage.readAsBytesSync(),
                 ),
               ),
             );
