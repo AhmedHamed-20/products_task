@@ -69,5 +69,8 @@ This app utilizes the following dependencies:
 
 
 These dependencies handle the local SQLite database, image selection from the device's gallery.
+
+## UI/UX
+https://www.figma.com/file/6BiJGcYbwsgEb3vIXk2esF/Products?type=design&node-id=0%3A1&t=QYloXMQxoh9uO7CN-1
 ## Screenshots
 <img src="https://github.com/AhmedHamed-20/products_task/assets/72945669/1f902ae8-7913-4850-aa99-32cad36e65ed" width="280"> <img src="https://github.com/AhmedHamed-20/products_task/assets/72945669/8531157f-cb48-4a9c-9b10-f8cf54d520a5" width="280"> <img src="https://github.com/AhmedHamed-20/products_task/assets/72945669/cbca0af1-8d97-4161-910c-efdfee815a74" width="280"> <img src="https://github.com/AhmedHamed-20/products_task/assets/72945669/6eb527e0-5ae8-4ec4-afbe-f457469f1a38" width="280">
