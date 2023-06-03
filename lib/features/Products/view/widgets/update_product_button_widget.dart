@@ -5,6 +5,7 @@ import 'package:products_task/core/constants/app_strings.dart';
 import 'package:products_task/core/controllers/text_fileds_controllers.dart';
 import 'package:products_task/core/widgets/default_button.dart';
 import 'package:products_task/features/Products/model/products_model.dart';
+import 'package:products_task/features/Products/view/widgets/update_product_screen_text_fields.dart';
 import 'package:products_task/features/Products/view_model/update_delete_product_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -52,7 +53,9 @@ class UpdateProductButtonDesign extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultButtonWithTextWidget(
       onPressed: () {
-        onPressedOnUpdateButton(context, productId);
+        if (updateProductFormKey.currentState!.validate()) {
+          onPressedOnUpdateButton(context, productId);
+        }
       },
       text: AppStrings.updateProduct,
     );

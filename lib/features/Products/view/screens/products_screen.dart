@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:products_task/core/constants/app_padding.dart';
-import 'package:products_task/core/constants/app_strings.dart';
 import 'package:products_task/core/constants/extensions.dart';
 import 'package:products_task/core/routes/app_routes_names.dart';
 import 'package:products_task/core/widgets/error_screen.dart';
