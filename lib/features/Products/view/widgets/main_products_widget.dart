@@ -81,7 +81,9 @@ class _ProductsWidgetState extends State<ProductsWidget> {
             return ErrorScreen(
               message: value.errorMessage,
               isHoleScreen: false,
-              onRetryPressed: () {},
+              onRetryPressed: () {
+                getAllProducts();
+              },
             );
         }
       },

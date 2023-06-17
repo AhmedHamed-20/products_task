@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:products_task/core/constants/app_padding.dart';
+import 'package:products_task/core/constants/app_strings.dart';
 import 'package:products_task/core/constants/extensions.dart';
 import 'package:products_task/core/routes/app_routes_names.dart';
 import 'package:products_task/core/widgets/error_screen.dart';
 import 'package:products_task/features/Products/view_model/get_products_view_model.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../core/constants/params.dart';
+import '../../../../core/database/datebase_queries.dart';
 import '../../../../core/utls/utls.dart';
 import '../widgets/main_products_widget.dart';
 
@@ -48,7 +51,15 @@ class ProductsScreen extends StatelessWidget {
                 return ErrorScreen(
                   message: productsProvider.errorMessage,
                   isHoleScreen: false,
-                  onRetryPressed: () {},
+                  onRetryPressed: () {
+                    productsProvider.initDataBase(
+                      const InitDatabaseParams(
+                        databasesName: AppStrings.products,
+                        query: DatebaseQueries.createTableQuery,
+                        version: 1,
+                      ),
+                    );
+                  },
                 );
             }
           },
