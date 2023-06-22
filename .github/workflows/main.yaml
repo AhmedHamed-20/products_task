@@ -7,6 +7,7 @@ on:
       - master
 name: "Build & Release"
 jobs:
+  build:
       - name: Send Email Notifications
         uses: dawidd6/action-send-mail@v3
         with:
@@ -22,8 +23,7 @@ jobs:
             
             Your app build was successful! Here are the download links:)
             
-            Android APK: ${{ steps.release.outputs.android_download_link }}
-            iOS IPA: ${{ steps.release.outputs.ios_download_link }}
+            
             
             Best regards,
             Your App Team
