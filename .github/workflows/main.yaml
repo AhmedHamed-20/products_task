@@ -49,7 +49,7 @@ jobs:
           body: |
             Hi there,
             
-            Your app build was successful! Here are the download links:
+            Your app build was successful! Here are the download links:)
             
             Android APK: ${{ steps.release.outputs.android_download_link }}
             iOS IPA: ${{ steps.release.outputs.ios_download_link }}
