@@ -43,6 +43,8 @@ jobs:
           server_port: 587
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
+          from: ahmedmohamedah731@gmail.com
+          to: anaahmedmohamed57@gmail.com
           subject: "Build Successful - Download Links"
           body: |
             Hi there,
@@ -54,7 +56,6 @@ jobs:
             
             Best regards,
             Your App Team
-          to: anaahmedmohamed57@gmail.com
 
 
 # push to master, main, develop
