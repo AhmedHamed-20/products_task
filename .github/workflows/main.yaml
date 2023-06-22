@@ -8,6 +8,9 @@ on:
 name: "Build & Release"
 jobs:
   build:
+    name: Build & Release
+    runs-on: macos-latest
+    steps:
       - name: Send Email Notifications
         uses: dawidd6/action-send-mail@v3
         with:
@@ -22,8 +25,7 @@ jobs:
             Hi there,
             
             Your app build was successful! Here are the download links:)
-            
-            
+           
             
             Best regards,
             Your App Team
