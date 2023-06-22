@@ -51,12 +51,17 @@ jobs:
             
             Your app build was successful! Here are the download links:)
             
-            Android APK: ${{ steps.release.outputs.android_download_link }}
-            iOS IPA: ${{ steps.release.outputs.ios_download_link }}
+            Android APK: ${{ env.ANDROID_DOWNLOAD_LINK }}
+            iOS IPA: ${{ env.IOS_DOWNLOAD_LINK }}
             
             Best regards,
             Your App Team
 
+      - name: Export Download Links
+        id: export_links
+        run: |
+          echo "ANDROID_DOWNLOAD_LINK=https://github.com/$GITHUB_REPOSITORY/releases/latest/download/app-armeabi-v7a-debug.apk" >> $GITHUB_ENV
+          echo "IOS_DOWNLOAD_LINK=https://github.com/$GITHUB_REPOSITORY/releases/latest/download/app.ipa" >> $GITHUB_ENV
 
 # push to master, main, develop
 # pull request on main master
