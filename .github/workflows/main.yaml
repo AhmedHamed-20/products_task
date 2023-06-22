@@ -36,9 +36,25 @@ jobs:
           tag: v1.0.${{ github.run_number }}
           token: ${{ secrets.TOKEN }}
 
-
-
-
+      - name: Send Email Notifications
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "Build Successful - Download Links"
+          body: |
+            Hi there,
+            
+            Your app build was successful! Here are the download links:
+            
+            Android APK: ${{ steps.release.outputs.android_download_link }}
+            iOS IPA: ${{ steps.release.outputs.ios_download_link }}
+            
+            Best regards,
+            Your App Team
+          to: anaahmedmohamed57@gmail.com
 
 
 # push to master, main, develop
