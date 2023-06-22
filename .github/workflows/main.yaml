@@ -36,11 +36,14 @@ jobs:
           tag: v1.0.${{ github.run_number }}
           token: ${{ secrets.TOKEN }}
 
-      - name: Export Download Links
-        id: export_links
+      - name: Get Release Assets
+        id: release_assets
         run: |
-          echo "ANDROID_DOWNLOAD_LINK=https://github.com/$GITHUB_REPOSITORY/releases/latest/download/app-armeabi-v7a-debug.apk" >> $GITHUB_ENV
-          echo "IOS_DOWNLOAD_LINK=https://github.com/$GITHUB_REPOSITORY/releases/latest/download/app.ipa" >> $GITHUB_ENV
+          RELEASE_ID=$(curl -s -X GET -u ${{ secrets.TOKEN }} "https://api.github.com/repos/$GITHUB_REPOSITORY/releases/latest" | jq -r '.id')
+          ASSETS=$(curl -s -X GET -u ${{ secrets.TOKEN }} "https://api.github.com/repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID/assets" | jq -r '.[].browser_download_url')
+
+          echo "::set-output name=ANDROID_DOWNLOAD_LINK::$(echo "$ASSETS" | grep 'app-armeabi-v7a-debug.apk$')"
+          echo "::set-output name=IOS_DOWNLOAD_LINK::$(echo "$ASSETS" | grep 'app.ipa$')"
 
       - name: Send Email Notifications
         uses: dawidd6/action-send-mail@v3
@@ -57,11 +60,10 @@ jobs:
             
             Your app build was successful! Here are the download links:
             
-            Android APK: ${{ steps.export_links.outputs.ANDROID_DOWNLOAD_LINK }}
-            iOS IPA: ${{ steps.export_links.outputs.IOS_DOWNLOAD_LINK }}
+            Android APK: ${{ steps.release_assets.outputs.ANDROID_DOWNLOAD_LINK }}
+            iOS IPA: ${{ steps.release_assets.outputs.IOS_DOWNLOAD_LINK }}
             
             Best regards,
             Your App Team
-
 # push to master, main, develop
 # pull request on main master
