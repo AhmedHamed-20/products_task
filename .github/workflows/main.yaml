@@ -67,12 +67,12 @@ jobs:
             Your App Team
   build-linux:
 
+    needs: build_macos
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v1
       - name: set up JDK 1.8
-      - needs: build_macos
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
