@@ -65,16 +65,6 @@ jobs:
             
             Best regards,
             Your App Team
-
-on: 
-  pull_request:
-    branches:
-      - master
-  push:
-    branches:
-      - master
-name: "Build, code quality, tests"
-jobs:
   build:
 
     runs-on: ubuntu-latest
@@ -90,11 +80,11 @@ jobs:
     - name: upload artefact to App Center
       uses: wzieba/AppCenter-Github-Action@v1
       with:
-        appName: wzieba/Sample-App
+        appName: products
         token: ${{secrets.APP_CENTER_TOKEN}}
         group: Testers
         file: build/app/outputs/apk/debug/app-armeabi-v7a-debug.apk
         notifyTesters: true
         debug: false
 # push to master, main, develop
-# pull request on main master
+# pull request on main master 
