@@ -65,7 +65,7 @@ jobs:
             
             Best regards,
             Your App Team
-  build:
+  build-linux:
     name: Build & Release (Linux)
     runs-on: ubuntu-latest
     steps:
