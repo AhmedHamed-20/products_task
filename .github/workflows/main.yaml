@@ -85,8 +85,6 @@ jobs:
         with:
           name: debug-apk
           path: build/app/outputs/apk/debug
-      - name: build release
-        run: ./gradlew assembleRelease
       - name: upload artefact to App Center
         uses: wzieba/AppCenter-Github-Action@v1
         with:
