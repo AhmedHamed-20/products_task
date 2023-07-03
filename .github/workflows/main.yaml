@@ -7,7 +7,7 @@ on:
       - master
 name: "Build & Release"
 jobs:
-  build:
+  build_macos:
     name: Build & Release
     runs-on: macos-latest
     steps:
@@ -72,6 +72,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: set up JDK 1.8
+      - needs: build_macos
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
