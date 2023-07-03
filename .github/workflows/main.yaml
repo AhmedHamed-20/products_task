@@ -66,8 +66,6 @@ jobs:
             Best regards,
             Your App Team
 
-name: Build, code quality, tests
-
 on: 
   pull_request:
     branches:
@@ -75,7 +73,7 @@ on:
   push:
     branches:
       - master
-
+name: "Build, code quality, tests"
 jobs:
   build:
 
