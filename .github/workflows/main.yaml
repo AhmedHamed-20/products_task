@@ -88,10 +88,10 @@ jobs:
       - name: upload artefact to App Center
         uses: wzieba/AppCenter-Github-Action@v1
         with:
-          appName: products
+          appName: products_apk
           token: ${{secrets.APP_CENTER_TOKEN}}
-          group: Testers
-          file: /home/runner/work/products_task/products_task/build/app/outputs/apk/debugapp-armeabi-v7a-debug.apk
+          group: Beta Testers
+          file: build/app/outputs/apk/debug/app-armeabi-v7a-debug.apk
           notifyTesters: true
           debug: false
 # push to master, main, develop
