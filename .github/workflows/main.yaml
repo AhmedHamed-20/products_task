@@ -66,9 +66,8 @@ jobs:
             Best regards,
             Your App Team
   build:
-    name: Build & Release
+    name: Build & Release (Linux)
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v1
       - name: set up JDK 1.8
