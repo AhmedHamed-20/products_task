@@ -35,7 +35,11 @@ jobs:
           artifacts: "build/app/outputs/apk/debug/*,build/ios/iphoneos/app.ipa"
           tag: v1.0.${{ github.run_number }}
           token: ${{ secrets.TOKEN }}
-
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: debug-apk
+          path: build/app/outputs/apk/debug/app-armeabi-v7a-debug.apk
       - name: Get Release Assets
         id: release_assets
         run: |
@@ -76,6 +80,11 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+      - name: Download APK artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: debug-apk
+          path: build/app/outputs/apk/debug
       - name: build release
         run: ./gradlew assembleRelease
       - name: upload artefact to App Center
